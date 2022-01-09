@@ -1,0 +1,3 @@
+packages:
+  HelloWorld:
+    path: Packages/HelloWorld

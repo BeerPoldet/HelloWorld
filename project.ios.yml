@@ -1,0 +1,31 @@
+targets:
+  HelloWorldiOS:
+    type: application
+    platform: iOS
+    sources: [HelloWorldiOS]
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: 1
+        CODE_SIGN_ENTITLEMENTS: "HelloWorldiOS/App.entitlements"
+    info:
+      path: HelloWorldiOS/Info.plist
+      properties:
+        CFBundleDisplayName: $(APP_DISPLAY_NAME)
+        CFBundleShortVersionString: "0.1"
+        CFBundleVersion: "1"
+        ITSAppUsesNonExemptEncryption: false
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: true
+        UILaunchStoryboardName: LaunchScreen
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+    scheme:
+      configVariants: iOS
+    templates:
+    - iOS_Provisioning
+    dependencies:
+    - package: HelloWorld
+      product: AppFeature
+    - package: HelloWorld
+      product: Config
+    - package: HelloWorld
+      product: Resource

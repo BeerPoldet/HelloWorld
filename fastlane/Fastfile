@@ -1,0 +1,119 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Run tests"
+  lane :test do
+    isError = false
+    device_model = "iPhone 12 Pro Max"
+    Dir.chdir("..") do
+      result = sh(
+        "
+          IgnoreFileSystemDeviceInodeChanges=1 xcodebuild \
+            -project 'HelloWorld.xcodeproj' \
+            -scheme 'HelloWorldiOS' \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=#{device_model},OS=latest' \
+            -clonedSourcePackagesDirPath 'Packages/.cache' \
+            -showBuildTimingSummary \
+            -derivedDataPath '~/Library/Developer/Xcode/DerivedData/HelloWorld-CI' \
+            test | xcbeautify
+        ",
+        error_callback: -> (result) {
+          isError = true
+        }
+      )
+      isError |= result.include? "** TEST FAILED **" 
+      isError |= result.include? "xcodebuild: error" 
+    end
+    if isError
+      UI.user_error! "Test Failed"
+    end
+  end
+
+  lane :deploy do
+    begin
+      latest_testflight_build_number(
+        api_key_path: ".secret/app_store_connect_api_key.json",
+        live: true
+      )
+      latest_version_number = lane_context[SharedValues::LATEST_TESTFLIGHT_VERSION]
+    rescue
+      latest_version_number = "0.1"
+    end
+
+    latest_testflight_build_number(
+      api_key_path: ".secret/app_store_connect_api_key.json",
+      live: false,
+      initial_build_number: 0
+    )
+    latest_build_number = lane_context[SharedValues::LATEST_TESTFLIGHT_BUILD_NUMBER]
+
+    increment_version_number(
+      version_number: latest_version_number
+    )
+    increment_build_number(
+      build_number: latest_build_number
+    )
+    increment_version_number(
+      bump_type: 'major'
+    )
+    increment_build_number
+
+    gym(
+      scheme: "HelloWorldiOS",
+      clean: true
+    )
+
+    deliver(
+      precheck_include_in_app_purchases: false
+    )
+  end
+
+  lane :submit_review do
+    deliver(
+      force: false,
+      submit_for_review: true,
+      skip_metadata: false,
+      skip_screenshots: false,
+      skip_binary_upload: true
+    )
+  end
+
+  lane :metadata do
+    deliver(
+      force: false,
+      precheck_include_in_app_purchases: false,
+      skip_binary_upload: true
+    )
+  end
+
+  lane :update_app_privacy do
+    upload_app_privacy_details_to_app_store(
+      skip_upload: true
+    )
+  end
+
+  lane :upload_app_privacy do
+    upload_app_privacy_details_to_app_store(
+      json_path: "fastlane/app_privacy_details.json"
+    )
+  end
+
+  lane :precheck_metadata do
+    precheck(
+      include_in_app_purchases: false
+    )
+  end
+
+  lane :provision_certs do |options|
+    match(
+      type: "development",
+      api_key_path: ".secret/app_store_connect_api_key.json"
+    )
+    match(
+      type: "appstore",
+      api_key_path: ".secret/app_store_connect_api_key.json"
+    )
+  end
+end
+

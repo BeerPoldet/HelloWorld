@@ -1,0 +1,6 @@
+include:
+- project.settings.yml
+- project.provision.yml
+- project.packages.yml
+- project.previews.yml
+- project.ios.yml
