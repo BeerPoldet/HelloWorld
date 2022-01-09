@@ -1,4 +1,3 @@
 import ComposableArchitecture
 
-public enum AppAction: Equatable {
-}
+public enum AppAction: Equatable {}

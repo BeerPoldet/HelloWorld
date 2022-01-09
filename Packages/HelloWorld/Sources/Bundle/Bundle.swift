@@ -20,7 +20,7 @@ public extension Foundation.Bundle {
       Bundle(for: CurrentBundleFinder.self).resourceURL?.deletingLastPathComponent()
         .deletingLastPathComponent().deletingLastPathComponent(),
       Bundle(for: CurrentBundleFinder.self).resourceURL?.deletingLastPathComponent()
-        .deletingLastPathComponent()
+        .deletingLastPathComponent(),
     ]
 
     for candidate in candidates {

@@ -4,7 +4,13 @@ platform :ios do
   desc "Run tests"
   lane :test do
     isError = false
-    device_model = "iPhone 12 Pro Max"
+    device_model = "iPhone 13 Pro Max (UITest)"
+    device_uuid = sh "
+      xcrun simctl create '#{device_model}' \
+          com.apple.CoreSimulator.SimDeviceType.iPhone-13-Pro-Max \
+          com.apple.CoreSimulator.SimRuntime.iOS-15-2
+    "
+    sh "xcrun simctl boot #{device_uuid} >> /dev/null"
     Dir.chdir("..") do
       result = sh(
         "
@@ -12,7 +18,7 @@ platform :ios do
             -project 'HelloWorld.xcodeproj' \
             -scheme 'HelloWorldiOS' \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=#{device_model},OS=latest' \
+            -destination 'platform=iOS Simulator,name=#{device_model},OS=15.2' \
             -clonedSourcePackagesDirPath 'Packages/.cache' \
             -showBuildTimingSummary \
             -derivedDataPath '~/Library/Developer/Xcode/DerivedData/HelloWorld-CI' \
@@ -25,6 +31,7 @@ platform :ios do
       isError |= result.include? "** TEST FAILED **" 
       isError |= result.include? "xcodebuild: error" 
     end
+    sh "xcrun simctl delete #{device_uuid} >> /dev/null"
     if isError
       UI.user_error! "Test Failed"
     end

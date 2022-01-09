@@ -54,7 +54,7 @@ let package = Package(
     .package(
       url: "https://github.com/pointfreeco/swift-composable-architecture.git",
       from: "0.22.0"
-    )
+    ),
   ],
   targets: [
     // MARK: - Core Target
@@ -64,7 +64,7 @@ let package = Package(
     .target(
       name: "ComposableArchitectureExt",
       dependencies: [
-        .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
       ]
     ),
     .target(
@@ -72,7 +72,7 @@ let package = Package(
       dependencies: ["Bundle"],
       exclude: [
         "Stencils",
-        "swiftgen.yml"
+        "swiftgen.yml",
       ],
       resources: [.process("Colors"), .process("Images"), .process("L10N")]
     ),
@@ -100,7 +100,7 @@ let package = Package(
       name: "AppFeatureTests",
       dependencies: [
         "AppFeature",
-        .product(name: "SnapshotTesting", package: "SnapshotTesting")
+        .product(name: "SnapshotTesting", package: "SnapshotTesting"),
       ],
       exclude: ["__Snapshots__"]
     ),

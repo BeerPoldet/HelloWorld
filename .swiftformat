@@ -26,7 +26,7 @@
 --nospaceoperators
 
 # trailingCommas
---commas inline
+--commas always
 
 # unusedArguments
 --stripunusedargs closure-only

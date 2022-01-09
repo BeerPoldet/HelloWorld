@@ -1,6 +1,6 @@
 import ComposableArchitecture
-import SwiftUI
 import Resource
+import SwiftUI
 
 public struct AppView: View {
   let store: Store<AppState, AppAction>
@@ -10,7 +10,7 @@ public struct AppView: View {
   }
 
   public var body: some View {
-    WithViewStore(store) { viewStore in
+    WithViewStore(store) { _ in
       Text(L10N.greet)
     }
   }
