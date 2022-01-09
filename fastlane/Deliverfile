@@ -1,0 +1,95 @@
+api_key_path ".secret/app_store_connect_api_key.json"
+app_identifier "com.assanee.HelloWorld"
+app_icon "metadata/AppIcon.png"
+username "poladet.a@gmail.com"
+
+app_review_information(
+  first_name: "Poldet",
+  last_name: "Assanangkornchai",
+  phone_number: "+66 973454369",
+  email_address: "poldet.ai@gmail.com"
+)
+
+automatic_release true
+
+force true
+
+price_tier 0
+platform "ios"
+
+reset_ratings false
+
+submission_information({
+  add_id_info_limits_tracking: false,
+  add_id_info_serves_ads: false,
+  add_id_info_tracks_action: false,
+  add_id_info_tracks_install: false,
+  add_id_info_uses_idfa: false,
+  content_rights_has_rights: false,
+  content_rights_contains_third_party_content: false,
+  export_compliance_platform: 'ios',
+  export_compliance_compliance_required: false,
+  export_compliance_encryption_updated: false,
+  export_compliance_app_type: nil,
+  export_compliance_uses_encryption: false,
+  export_compliance_is_exempt: false,
+  export_compliance_contains_third_party_cryptography: false,
+  export_compliance_contains_proprietary_cryptography: false,
+  export_compliance_available_on_french_store: false
+})
+
+trade_representative_contact_information(
+  first_name: "Poldet",
+  last_name: "Assanangkornchai",
+  address_line1: "Sukhumvit 93",
+  address_line2: "",
+  address_line3: "",
+  city_name: "Bangkok",
+  state: "Bangkok",
+  country: "Thailand",
+  postal_code: "10260",
+  phone_number: "+66 973454369",
+  email_address: "poldet.ai@gmail.com",
+)
+
+# Metadata
+# Editable while live
+
+name(
+  "en-US" => "HelloWorld Assanee"
+)
+
+subtitle(
+  "en-US" => "HelloWorld Assanee"
+)
+
+keywords(
+  "default" => "Health,Utility"
+)
+
+# Uneditable while live
+
+release_notes(
+  "en-US" => "HelloWorld Assanee"
+)
+
+support_url(
+  "default" => "https://twitter.com/beerpoldet"
+)
+
+privacy_url(
+  "default" => "https://beerpoldet.github.io/helloworld-privacy-policy"
+)
+
+release_notes(
+  "default" => "Release notes"
+)
+
+promotional_text(
+  "default" => "Promotional text"
+)
+
+copyright "#{Time.now.year} Poldet Assanangkornchai"
+
+primary_category "HEALTH_AND_FITNESS"
+secondary_category "UTILITIES"

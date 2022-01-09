@@ -1,0 +1,24 @@
+strings:
+  inputs: L10N/en.lproj/L10N.strings
+  outputs:
+    - templatePath: Stencils/l10n.stencil
+      output: ./__Generated__/L10N.swift
+      params:
+        publicAccess: true
+        enumName: L10N
+        
+xcassets:
+- inputs:
+    - Images/Images.xcassets
+  outputs:
+    - templatePath: Stencils/image.stencil
+      output: ./__Generated__/Images.swift
+      params:
+        publicAccess: true
+- inputs:
+    - Colors/Colors.xcassets
+  outputs:
+    - templatePath: Stencils/color.stencil
+      output: ./__Generated__/Colors.swift
+      params:
+        publicAccess: true

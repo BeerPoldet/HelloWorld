@@ -1,0 +1,6 @@
+app_identifier "com.assanee.HelloWorld"
+git_url "git@github.com:beerpoldet/apple-development-certificates.git"
+storage_mode "git"
+type "appstore" # The default type, can be: appstore, adhoc, enterprise or development
+username "poladet.a@gmail.com" # Your Apple Developer Portal username
+

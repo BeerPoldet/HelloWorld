@@ -1,0 +1,26 @@
+name: HelloWorld
+
+options:
+  deploymentTarget: 
+    iOS: 15.0
+
+settings:
+  base:
+    APP_DISPLAY_NAME: HelloWorld
+    CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: true
+    CODE_SIGN_STYLE: Manual
+    CURRENT_PROJECT_VERSION: 1
+    DEVELOPMENT_TEAM: F6395XL53N
+    PRODUCT_BUNDLE_IDENTIFIER: com.assanee.HelloWorld
+    PRODUCT_NAME: HelloWorld
+    VERSIONING_SYSTEM: "apple-generic"
+  groups:
+  - debugPreset
+
+settingGroups:
+  debugPreset:
+    configs:
+      Debug:
+        OTHER_SWIFT_FLAGS:
+        - -Xfrontend -warn-long-function-bodies=1000
+        - -Xfrontend -warn-long-expression-type-checking=1000
